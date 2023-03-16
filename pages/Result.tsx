@@ -17,9 +17,15 @@ const Result = () => {
         id="secondColumn"
         className=" w-full p-5 overflow-y-scroll overflow-x-hidden"
       >
-        {articles.map((article) => (
-          <ArticleCard article={article} key={article.id} />
-        ))}
+        {articles.length > 0 ? (
+          articles.map((article) => (
+            <ArticleCard article={article} key={article.id} />
+          ))
+        ) : (
+          <div className="text-2xl text-center h-full text-white">
+            Aucun article trouvé
+          </div>
+        )}
       </div>
     </div>
   )
