@@ -3,9 +3,16 @@ import Article from '../types/article'
 
 interface Props {
   article: Article
+  addToCart: (article: Article) => void
+  inCart?: boolean
+  showImage: boolean
 }
 
-const ArticleCard = ({ article }: Props) => {
+const ArticleCard = ({ article, addToCart, inCart, showImage }: Props) => {
+  const handleClick = () => {
+    addToCart(article)
+  }
+
   if (article.name.includes('|')) {
     article.name = article.name.split('|')[0]
   }
@@ -16,7 +23,12 @@ const ArticleCard = ({ article }: Props) => {
   const valide_to_month = new Date(article.valid_to).getMonth()
 
   return (
-    <div className="p-5 border-b text-white hover:bg-white/20 lowercase ">
+    <div
+      className={`p-5 border-b text-white hover:bg-white/20 lowercase ${
+        inCart ? 'bg-white/30' : ''
+      } `}
+      onClick={handleClick}
+    >
       <h2 className="flex justify-between mb-2">
         <p className="text-lg text-green-500 first-letter:uppercase ">
           {article.name}
@@ -40,7 +52,15 @@ const ArticleCard = ({ article }: Props) => {
           </p>
         </div>
         <div>
-          <img src={article.clean_image_url} alt="article image" className="" />
+          {showImage ? (
+            <img
+              src={article.clean_image_url}
+              alt="article image"
+              className=""
+            />
+          ) : (
+            ''
+          )}
         </div>
       </div>
     </div>
