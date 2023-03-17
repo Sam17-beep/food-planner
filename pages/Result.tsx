@@ -11,10 +11,8 @@ const Result = () => {
   const addToCart = (article: Article) => {
     if (cart.some((item) => item.id === article.id)) {
       setCart(cart.filter((item) => item.id !== article.id))
-      console.log('removed')
     } else {
       setCart([...cart, article])
-      console.log('added')
     }
   }
 
