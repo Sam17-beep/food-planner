@@ -3,6 +3,8 @@ import { useArticles } from '../context/state'
 import SearchBar from '../components/SearchBar'
 import ArticleCard from '../components/ArticleCard'
 import Article from '../types/article'
+import ResultList from '../components/ResultList'
+import Cart from '../components/Cart'
 
 const Result = () => {
   const { articles } = useArticles()
@@ -23,44 +25,14 @@ const Result = () => {
           <SearchBar />
         </div>
         <div id="cart" className="mt-5">
-          <h2 className="text-2xl text-white">Panier</h2>
-          <div className="mt-5">
-            {cart.length > 0 ? (
-              cart.map((article) => (
-                <ArticleCard
-                  article={article}
-                  key={article.id}
-                  addToCart={addToCart}
-                  showImage={false}
-                />
-              ))
-            ) : (
-              <div className="text-lg text-center h-full text-white">
-                Rien dans le panier
-              </div>
-            )}
-          </div>
+          <Cart cart={cart} addToCart={addToCart} />
         </div>
       </div>
       <div
         id="secondColumn"
         className=" w-full p-5 overflow-y-scroll overflow-x-hidden"
       >
-        {articles.length > 0 ? (
-          articles.map((article) => (
-            <ArticleCard
-              article={article}
-              key={article.id}
-              addToCart={addToCart}
-              inCart={cart.some((item) => item.id === article.id)}
-              showImage={true}
-            />
-          ))
-        ) : (
-          <div className="text-2xl text-center h-full text-white">
-            Aucun article trouvé
-          </div>
-        )}
+        <ResultList articles={articles} addToCart={addToCart} cart={cart} />
       </div>
     </div>
   )
