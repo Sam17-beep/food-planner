@@ -4,26 +4,6 @@ import Article from '../types/article'
 const endpoint =
   'https://backflipp.wishabi.com/flipp/items/search?locale=fr-ca&'
 
-export const getArticlesFromStore = async function (
-  storeName: string,
-  codePostal: string
-): Promise<Article[]> {
-  const res = await axios.get(
-    `${endpoint}&postal_code=${codePostal}&q=${storeName}`
-  )
-  return await res.data.items
-}
-
-export const getArticle = async function (
-  articleName: string,
-  codePostal: string
-): Promise<Article[]> {
-  const res = await axios.get(
-    `${endpoint}&postal_code=${codePostal}&q=${articleName}`
-  )
-  return await res.data.items
-}
-
 export const getArticleFromStores = async function (
   storeNames: string[],
   articleName: string,
@@ -47,4 +27,22 @@ export const getArticleFromStores = async function (
     })
     return keepIt
   })
+}
+
+export const getArticlesFromStores = async function (
+  storeNames: string[],
+  articleNames: string[],
+  codePostal: string
+): Promise<Article[]> {
+  let articles: Article[] = []
+  for (let i = 0; i < articleNames.length; i++) {
+    const articleName = articleNames[i]
+    const articlesFromStores = await getArticleFromStores(
+      storeNames,
+      articleName,
+      codePostal
+    )
+    articles = [...articles, ...articlesFromStores]
+  }
+  return articles
 }

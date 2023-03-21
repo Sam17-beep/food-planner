@@ -13,3 +13,15 @@ export const ArticlesContext = createContext<GlobalArticle>({
 export function useArticles() {
   return useContext(ArticlesContext)
 }
+
+export type GlobalCart = {
+  cart: Article[]
+  setCart: (cart: Article[]) => void
+}
+export const CartContext = createContext<GlobalCart>({
+  cart: [],
+  setCart: () => {},
+})
+export function useCart() {
+  return useContext(CartContext)
+}

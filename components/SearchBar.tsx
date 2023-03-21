@@ -39,8 +39,11 @@ const SearchBar = ({}: Props) => {
       }
     }
 
-    api.getArticleFromStores(stores, search, 'g1w4v9').then((res) => {
-      setArticles(res.sort((a, b) => a.current_price - b.current_price))
+    const articles = search.split(',').map((item) => item.trim())
+    console.log(articles)
+
+    api.getArticlesFromStores(stores, articles, 'g1w4v9').then((res) => {
+      setArticles(res)
       router.push('/Result')
     })
   }
@@ -48,7 +51,7 @@ const SearchBar = ({}: Props) => {
   return (
     <div id="searchBar">
       <form className="flex flex-col gap-4" onSubmit={submitHandler}>
-        <div className="flex justify-between gap-2">
+        <div className="flex gap-x-2 max-xl:max-w-lg">
           <input
             type="text"
             className="w-full h-12 rounded-[10px] bg-white/20 text-white px-4"
@@ -70,11 +73,11 @@ const SearchBar = ({}: Props) => {
         </div>
       </form>
 
-      <div className="flex justify-between">
+      <div className="flex xl:justify-between max-xl:max-w-lg flex-wrap xl:gap-x-1 max-xl:justify-between">
         {options.map((option, index) => {
           return (
             <button
-              className={`p-2 m-3 border-red-500 border rounded first:ml-0 last:mr-0 text-white ${
+              className={`p-2 mt-3 border-red-500 border rounded first:ml-0 last:mr-0 text-white ${
                 selected[index] ? 'bg-red-500' : 'bg-white/20'
               }`}
               onClick={onStoreClick}
