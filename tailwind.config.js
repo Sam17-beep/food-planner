@@ -7,6 +7,9 @@ module.exports = {
     './node_modules/react-tailwindcss-select/dist/index.esm.js',
   ],
   theme: {
+    fontFamily: {
+      sans: ['Inter', 'sans-serif'],
+    },
     extend: {},
   },
   plugins: [],

@@ -16,6 +16,7 @@ const SearchBar = ({}: Props) => {
     { value: 'maxi', label: 'Maxi' },
     { value: 'walmart', label: 'Walmart' },
   ]
+  const [loading, setLoading] = useState(false)
 
   const [selected, setSelected] = useState<boolean[]>(
     Array(options.length).fill(false)
@@ -31,6 +32,7 @@ const SearchBar = ({}: Props) => {
   }
 
   const submitHandler = (e: any) => {
+    setLoading(true)
     e.preventDefault()
     const stores = []
     for (let i = 0; i < selected.length; i++) {
@@ -44,6 +46,7 @@ const SearchBar = ({}: Props) => {
 
     api.getArticlesFromStores(stores, articles, 'g1w4v9').then((res) => {
       setArticles(res)
+      setLoading(false)
       router.push('/Result')
     })
   }
@@ -88,6 +91,7 @@ const SearchBar = ({}: Props) => {
           )
         })}
       </div>
+      <p className=" text-white text-center">{loading ? 'loading' : ''}</p>
     </div>
   )
 }

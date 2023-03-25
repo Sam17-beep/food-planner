@@ -30,9 +30,7 @@ const ArticleCard = ({ article, addToCart, inCart, showImage }: Props) => {
       onClick={handleClick}
     >
       <h2 className="flex justify-between mb-2">
-        <p className=" text-2xl text-green-500 first-letter:uppercase ">
-          {article.name}
-        </p>
+        <p className=" text-2xl first-letter:uppercase ">{article.name}</p>
         <p className=" text-gray-400 text-xs">{article.merchant_name}</p>
       </h2>
       <div className="flex">

@@ -9,10 +9,14 @@ interface Props {
 }
 
 const ResultList = ({ articles, addToCart, cart }: Props) => {
+  const [sortedArticles, setSortedArticles] = React.useState<Article[]>(
+    articles.sort((a, b) => a.current_price - b.current_price)
+  )
+
   return (
     <>
-      {articles.length > 0 ? (
-        articles.map((article) => (
+      {sortedArticles.length > 0 ? (
+        sortedArticles.map((article) => (
           <ArticleCard
             article={article}
             key={article.id}
