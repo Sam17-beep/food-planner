@@ -9,10 +9,10 @@ interface Props {
 }
 
 const ResultList = ({ articles, addToCart, cart }: Props) => {
-  const [sortedArticles, setSortedArticles] = React.useState<Article[]>(
-    articles.sort((a, b) => a.current_price - b.current_price)
+  const sortedArticles = articles.sort(
+    (a, b) => a.current_price - b.current_price
   )
-  console.log('sortedArcicles - ', sortedArticles)
+
   return (
     <>
       {sortedArticles.length > 0 ? (

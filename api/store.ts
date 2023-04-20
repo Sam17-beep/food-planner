@@ -44,6 +44,5 @@ export const getArticlesFromStores = async function (
     )
     articles = [...articles, ...articlesFromStores]
   }
-  console.log(articles)
   return articles
 }

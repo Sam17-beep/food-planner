@@ -23,6 +23,24 @@ const SearchBar = ({}: Props) => {
     Array(options.length).fill(true)
   )
 
+  const aliments = [
+    'pomme',
+    'banane',
+    'carotte',
+    'patate',
+    'poulet',
+    'porc',
+    'boeuf',
+    'lait',
+    'oeuf',
+    'fromage',
+    'pâtes',
+    'riz',
+    'pomme de terre',
+  ]
+    .sort(() => 0.5 - Math.random())
+    .slice(0, 3)
+
   const onStoreClick = (e: any) => {
     const index = options.findIndex(
       (option) => option.label === e.target.innerHTML
@@ -46,7 +64,7 @@ const SearchBar = ({}: Props) => {
 
     api.getArticlesFromStores(stores, articles, 'g1w4v9').then((res) => {
       setArticles(res)
-      console.log(o)
+
       setLoading(false)
       router.push('/Result')
     })
@@ -59,7 +77,7 @@ const SearchBar = ({}: Props) => {
           <input
             type="text"
             className="w-full h-12 rounded-[10px] bg-white/20 text-white px-4"
-            placeholder="Chercher un aliment!"
+            placeholder={aliments.join(', ')}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />

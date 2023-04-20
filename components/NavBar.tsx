@@ -19,7 +19,10 @@ const NavBar = () => {
     <div className="flex items-center  text-white p-5 justify-between border-b select-none">
       <div className="text-xl">Food planner</div>
 
-      <div className="" onClick={clickHandler}>
+      <div
+        className=""
+        // onClick={clickHandler}
+      >
         Recherche par{' '}
         <span className="font-extrabold">{`${typeDeRecherche}`}</span>
       </div>
