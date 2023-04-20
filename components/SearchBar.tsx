@@ -5,9 +5,11 @@ import { useArticles } from '../context/state'
 interface Props {}
 
 const SearchBar = ({}: Props) => {
-  const [search, setSearch] = useState('')
-  const { setArticles } = useArticles()
   const router = useRouter()
+
+  const [search, setSearch] = useState('')
+  const { articles: o, setArticles } = useArticles()
+  const [loading, setLoading] = useState(false)
   const options = [
     { value: 'metro', label: 'Metro' },
     { value: 'iga', label: 'IGA' },
@@ -16,10 +18,9 @@ const SearchBar = ({}: Props) => {
     { value: 'maxi', label: 'Maxi' },
     { value: 'walmart', label: 'Walmart' },
   ]
-  const [loading, setLoading] = useState(false)
 
   const [selected, setSelected] = useState<boolean[]>(
-    Array(options.length).fill(false)
+    Array(options.length).fill(true)
   )
 
   const onStoreClick = (e: any) => {
@@ -42,10 +43,10 @@ const SearchBar = ({}: Props) => {
     }
 
     const articles = search.split(',').map((item) => item.trim())
-    console.log(articles)
 
     api.getArticlesFromStores(stores, articles, 'g1w4v9').then((res) => {
       setArticles(res)
+      console.log(o)
       setLoading(false)
       router.push('/Result')
     })

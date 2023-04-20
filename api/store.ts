@@ -13,7 +13,7 @@ export const getArticleFromStores = async function (
     `${endpoint}&postal_code=${codePostal}&q=${articleName}`
   )
   const articles = await res.data.items
-
+  console.log(res)
   return await articles.filter((article: Article) => {
     let keepIt = false
     storeNames.forEach((storeName: string) => {
@@ -44,5 +44,6 @@ export const getArticlesFromStores = async function (
     )
     articles = [...articles, ...articlesFromStores]
   }
+  console.log(articles)
   return articles
 }

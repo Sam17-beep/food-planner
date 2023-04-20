@@ -9,11 +9,23 @@ const Result = () => {
   const { articles } = useArticles()
   const { cart, setCart } = useCart()
 
-  const addToCart = (article: Article) => {
-    if (cart.some((item) => item.id === article.id)) {
-      setCart(cart.filter((item) => item.id !== article.id))
+  const addToCart = (article: Article, whatToDo?: string) => {
+    if (whatToDo) {
+      if (whatToDo === 'add') {
+        setCart([...cart, article])
+      } else if (whatToDo === 'remove') {
+        const index = cart.findIndex((item) => item.id === article.id)
+        if (index > -1) {
+          cart.splice(index, 1)
+          setCart([...cart])
+        }
+      }
     } else {
-      setCart([...cart, article])
+      if (cart.some((item) => item.id === article.id)) {
+        setCart(cart.filter((item) => item.id !== article.id))
+      } else {
+        setCart([...cart, article])
+      }
     }
   }
 

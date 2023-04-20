@@ -8,10 +8,10 @@ const NavBar = () => {
   const clickHandler = () => {
     if (typeDeRecherche === 'article') {
       setTypeDeRecherche('repas')
-      // router.push('/repas')
+      router.push('/repas')
     } else {
       setTypeDeRecherche('article')
-      // router.push('/Result')
+      router.push('/Result')
     }
   }
 
